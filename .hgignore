@@ -1,0 +1,15 @@
+syntax:glob
+bin
+Build
+*.plg
+*.ncb
+*.suo
+*.opt
+Testing/
+.vs/
+syntax: glob
+Backup/*
+testing/*
+ipch/*
+Backup1/*
+*sdf
