@@ -255,7 +255,7 @@ ifeq ($(strip $(macosx)),true)
 endif
 
 # defines the game needs...
-CFLAGS += -DLOCALE=US -DTARGET=POSTAL_2015
+CFLAGS += -DLOCALE=US -DTARGET=POSTAL_2015 -DSWITCH
 
 # includes ...
 CFLAGS += -I$(SRCDIR)
@@ -289,7 +289,7 @@ all: debugoff $(CLIENTEXE)
 debug: debugon $(CLIENTEXE)
 
 debugon:
-	$(eval CFLAGS += -DDEBUG -D_DEBUG -O0 -g)
+	$(eval CFLAGS += -DDEBUG -D_DEBUG -DRSP_DEBUG_OUT_FILE -O0 -g)
 
 debugoff:
 	$(eval OPTFLAG := -O3)
@@ -416,4 +416,20 @@ $(BINDIR)/$(OUTPUT).elf	:	$(OFILES)
 
 $(OFILES_SRC)	: $(HFILES_BIN)
 	
+
+debug	:	$(BINDIR)/$(OUTPUT).pfs0 $(BINDIR)/$(OUTPUT).nro
+
+$(BINDIR)/$(OUTPUT).pfs0	:	$(BINDIR)/$(OUTPUT).nso
+
+$(BINDIR)/$(OUTPUT).nso	:	$(BINDIR)/$(OUTPUT).elf
+
+ifeq ($(strip $(NO_NACP)),)
+$(BINDIR)/$(OUTPUT).nro	:	$(BINDIR)/$(OUTPUT).elf $(BINDIR)/$(OUTPUT).nacp
+else
+$(BINDIR)/$(OUTPUT).nro	:	$(BINDIR)/$(OUTPUT).elf
+endif
+
+$(BINDIR)/$(OUTPUT).elf	:	$(OFILES)
+
+$(OFILES_SRC)	: $(HFILES_BIN)	
 # end of Makefile ...

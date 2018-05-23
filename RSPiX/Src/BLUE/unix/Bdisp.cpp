@@ -595,10 +595,15 @@ extern int16_t rspQueryVideoMode(			// Returns 0 for each valid mode, then non-z
 static SDL_Renderer *createRendererToggleVsync(SDL_Window *window, const int index, bool vsync)
 {
     SDL_Renderer *retval = NULL;
+	
+#ifdef SWITCH	
+	retval = SDL_CreateRenderer(window, index, SDL_RENDERER_SOFTWARE);
+#else
     if (vsync)
         retval = SDL_CreateRenderer(window, index, SDL_RENDERER_PRESENTVSYNC);
     if (!retval)
         retval = SDL_CreateRenderer(window, index, 0);
+#endif		
     return retval;
 }
 
@@ -693,10 +698,10 @@ extern int16_t rspSetVideoMode(	// Returns 0 if successfull, non-zero otherwise
 #if PLATFORM_IOS
         flags |= SDL_WINDOW_BORDERLESS;   // don't show the status bar
 #endif
-        //TRACE("RequestedWidth %d   RequestedHeight %d\n",RequestedWidth,RequestedHeight);
+        TRACE("RequestedWidth %d   RequestedHeight %d\n",RequestedWidth,RequestedHeight);
 
         const char *title = sdlAppName ? sdlAppName : "";
-        sdlWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, RequestedWidth, RequestedHeight, flags);
+        sdlWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_FULLSCREEN);
         if (!sdlWindow)
         {
             char buf[128];
@@ -734,6 +739,9 @@ extern int16_t rspSetVideoMode(	// Returns 0 if successfull, non-zero otherwise
             SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "POSTAL", buf, NULL);
             exit(1);
         }
+
+
+TRACE("blah\n");
 
         SDL_SetRenderDrawColor(sdlRenderer, 0, 0, 0, 255);
         SDL_RenderClear(sdlRenderer);

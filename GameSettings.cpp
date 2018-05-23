@@ -335,7 +335,7 @@ int16_t CGameSettings::LoadPrefs(
 	int16_t sResult = 0;
 
 	pPrefs->GetVal("Paths", "CD", "", m_pszCDPath);
-#if defined(PANDORA) || defined(ODROID)
+#if defined(PANDORA) || defined(ODROID) || defined(SWITCH)
 	strcpy(m_pszCDPath, ".");
 #endif
 
@@ -346,7 +346,7 @@ int16_t CGameSettings::LoadPrefs(
 		rspMsgBox(RSP_MB_ICN_STOP | RSP_MB_BUT_OK, g_pszCriticalErrorTitle, g_pszBadCDPath_s_s, "CD", "Paths");
 
 	pPrefs->GetVal("Paths", "HD", "", m_pszHDPath);
-#if defined(PANDORA) || defined(ODROID)
+#if defined(PANDORA) || defined(ODROID) || defined(SWITCH)
 	strcpy(m_pszHDPath, ".");
 #endif
 	sResult = (strlen(m_pszHDPath) + 1) <= RSP_MAX_PATH ? 0 : -1;
@@ -356,7 +356,7 @@ int16_t CGameSettings::LoadPrefs(
 		rspMsgBox(RSP_MB_ICN_STOP | RSP_MB_BUT_OK, g_pszCriticalErrorTitle, g_pszBadPath_s_s, "HD", "Paths");
 
 	pPrefs->GetVal("Paths", "VD", "", m_pszVDPath);
-#if defined(PANDORA) || defined(ODROID)
+#if defined(PANDORA) || defined(ODROID) || defined(SWITCH)
 	strcpy(m_pszVDPath, ".");
 #endif
 	sResult = (strlen(m_pszVDPath) + 1) <= RSP_MAX_PATH ? 0 : -1;
@@ -366,7 +366,7 @@ int16_t CGameSettings::LoadPrefs(
 		rspMsgBox(RSP_MB_ICN_STOP | RSP_MB_BUT_OK, g_pszCriticalErrorTitle, g_pszBadPath_s_s, "VD", "Paths");
 
 	pPrefs->GetVal("Paths", "Sound", "", m_pszSoundPath);
-#if defined(PANDORA) || defined(ODROID)
+#if defined(PANDORA) || defined(ODROID) || defined(SWITCH)
 	strcpy(m_pszSoundPath, ".");
 #endif
 	sResult = (strlen(m_pszSoundPath) + 1) <= RSP_MAX_PATH ? 0 : -1;
@@ -376,7 +376,7 @@ int16_t CGameSettings::LoadPrefs(
 		rspMsgBox(RSP_MB_ICN_STOP | RSP_MB_BUT_OK, g_pszCriticalErrorTitle, g_pszBadPath_s_s, "Sound", "Paths");
 
 	pPrefs->GetVal("Paths", "Game", "", m_pszGamePath);
-#if defined(PANDORA) || defined(ODROID)
+#if defined(PANDORA) || defined(ODROID) || defined(SWITCH)
 	strcpy(m_pszGamePath, ".");
 #endif
 	sResult = (strlen(m_pszGamePath) + 1) <= RSP_MAX_PATH ? 0 : -1;
@@ -386,7 +386,7 @@ int16_t CGameSettings::LoadPrefs(
 		rspMsgBox(RSP_MB_ICN_STOP | RSP_MB_BUT_OK, g_pszCriticalErrorTitle, g_pszBadPath_s_s, "Game", "Paths");
 
 	pPrefs->GetVal("Paths", "Hoods", "", m_pszHoodsPath);
-#if defined(PANDORA) || defined(ODROID)
+#if defined(PANDORA) || defined(ODROID) || defined(SWITCH)
 	strcpy(m_pszHoodsPath, ".");
 #endif
 	sResult = (strlen(m_pszHoodsPath) + 1) <= RSP_MAX_PATH ? 0 : -1;

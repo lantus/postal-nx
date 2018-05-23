@@ -83,6 +83,9 @@
 	#endif	// RSP_TRACE_LOG_NAME
 #endif	// RSP_DEBUG_OUT_FILE
 
+
+#define RSP_TRACE_LOG_NAME	"TRACE.txt"
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Used to extract the filename from __FILE__.
@@ -111,12 +114,7 @@ char* Debug_FileName(char* pszPath)
 ///////////////////////////////////////////////////////////////////////////////
 void rspTrace(char *frmt, ... )
 	{
-	static int16_t	sSem	= 0;
-
-	// If something called by TRACE calls TRACE, we'd be likely to continue
-	// forever until stack overflow occurred.  So don't allow re-entrance.
-	if (++sSem == 1)
-		{
+ 
 		va_list varp;
 		  
 		va_start(varp, frmt);    
@@ -130,8 +128,8 @@ void rspTrace(char *frmt, ... )
 		vfprintf(stderr, frmt, varp);
 #endif
 
-#if defined(RSP_DEBUG_OUT_FILE)
-		static FILE*	fs	= NULL;	// NOTE that we never fclose this so we can get 
+ 
+		 FILE*	fs	= NULL;	// NOTE that we never fclose this so we can get 
 											// EVERY LAST TRACE -- so this may show up as
 											// a leak.  The system will close it though.
 		// If not yet open . . . 
@@ -139,42 +137,20 @@ void rspTrace(char *frmt, ... )
 			{
 			// Attempt to open (Note that we never close this -- the system does).
 			// This will probably show up as a leak.
-			fs	= fopen(RSP_TRACE_LOG_NAME, "wt");
+			fs	= fopen(RSP_TRACE_LOG_NAME, "a+");
 			if (fs)
 			{
-				fprintf(fs, "======== Postal Plus build %s %s ========\n", __DATE__, __TIME__);
-				time_t sysTime = time(NULL);
-				fprintf(fs, "Debug log file initialized: %s\n", ctime(&sysTime));
+				 
+				char szOutput[512];
+				vsnprintf(szOutput, 512, frmt, varp);
+				fprintf(fs, szOutput);
+				fclose(fs);				
 			}
 			}
-
-		// If open . . .
-		if (fs)
-			{
-			char szOutput[512];
-			vsnprintf(szOutput, 512, frmt, varp);
-			fprintf(fs, szOutput);
-			}
-#endif	// RSP_DEBUG_OUT_FILE
+	
 
 		va_end(varp);
-
-#if defined(RSP_DEBUG_OUT_MESSAGEBOX)
-		if (rspMsgBox(
-			RSP_MB_ICN_INFO | RSP_MB_BUT_YESNO,
-			"rspTrace",
-			"\"%s\"\n"
-			"Continue?",
-			szOutput) == RSP_MB_RET_NO)
-			{
-			DebugBreak();
-			exit(EXIT_SUCCESS);
-			}
-#endif	// RSP_DEBUG_OUT_MESSAGEBOX
-		}
-
-	// Remember to reduce.
-	sSem--;
+ 
 	}
 
 ///////////////////////////////////////////////////////////////////////////////

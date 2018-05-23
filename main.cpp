@@ -202,9 +202,13 @@ static int16_t SetupVideo(					// Returns 0 on success.
 #endif
 	// If "use current settings" is specified, we get the current device settings
 	// instead of using those specified in the prefs file.
+	
+	TRACE("rspGetVideoMode\n");
+	
 	if (sUseCurrentDeviceDimensions != FALSE)
 		rspGetVideoMode(NULL, &sDeviceWidth, &sDeviceHeight);
 
+	TRACE("rspSetVideoMode\n");
 	// Try setting video mode using device size specified in prefs file
 	sResult = rspSetVideoMode(
 		MAIN_SCREEN_DEPTH,
