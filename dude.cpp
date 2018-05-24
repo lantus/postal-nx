@@ -3123,7 +3123,7 @@ if (!demoCompat)
 		if (m_bJoyFire)
 		{
 			// Say we're firing our weapon
-			//input |= INPUT_FIRE;
+			input |= INPUT_FIRE;
 
 			// Then point in the correct direction
 			m_dRot = m_dJoyFireAngle;

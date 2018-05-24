@@ -524,6 +524,8 @@ extern const char *FindCorrectFile(const char *_pszName, const char *pszMode)
             locateCorrectCase(finalname);
         }
     }
+	
+	TRACE("finalname is \"%s\"\n", finalname);
 
     return finalname;
 }

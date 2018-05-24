@@ -786,6 +786,10 @@ int main(int argc, char **argv)
 		int16_t sDeviceWidth;
 		int16_t sDeviceHeight;
 		int16_t	sUseCurrentDeviceDimensions;
+		
+		TRACE("ssefsfd\n");
+		
+		
 		prefs.GetVal("Video", "DeviceWidth", MAIN_SCREEN_MIN_WIDTH, &sDeviceWidth);
 		prefs.GetVal("Video", "DeviceHeight", MAIN_SCREEN_MIN_HEIGHT, &sDeviceHeight);
 		prefs.GetVal("Video", "UseCurrentDeviceDimensions", 1, &sUseCurrentDeviceDimensions);
@@ -802,6 +806,7 @@ int main(int argc, char **argv)
 
 		// Close preferences file
 		prefs.Close();
+
 
 		// Make sure no errors occurred
 		if (prefs.IsError() == 0)
@@ -825,7 +830,8 @@ rspSetProfileOutput("profile.out");
 
 				// Set app name
 				rspSetApplicationName(g_pszAppName);
-
+				
+				
 #if defined(_DEBUG)
 				// Set mode to minimum use of CPU
 				rspSetDoSystemMode(RSP_DOSYSTEM_SLEEP);

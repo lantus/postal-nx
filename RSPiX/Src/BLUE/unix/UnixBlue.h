@@ -100,8 +100,9 @@ extern int32_t macReserveMemBytes;
 	// This causes the compiler to "optimize" out the data and the function call.
 	// We can't simply define TRACE as nothing (like ASSERT) because it takes
 	// a variable number of arguments.  So, this is the next best thing.
-	#define STRACE			1 ? (void)0 : rspTrace
-	#define TRACE			STRACE
+	#define STRACE			rspTrace
+	#define TRACE			STRACE("%s(%d):", __FILE__, __LINE__),STRACE
+
 
 	// Simply remove the function and it's paramters.
 	#define ASSERT(a)

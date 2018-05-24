@@ -98,6 +98,10 @@ extern int16_t rspSetSoundOutMode(				// Returns 0 if successfull, non-zero othe
     desired.samples = 2048;
 #endif
 
+#ifdef SWITCH
+    desired.samples = 2048;
+#endif
+
     desired.freq = lSampleRate;
     desired.channels = lChannels;
     desired.callback = sdl_audio_callback;

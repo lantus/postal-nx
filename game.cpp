@@ -4640,6 +4640,10 @@ int16_t CorrectifyBasePath(								// Returns 0 if successfull, non-zero otherwi
 	{
 	int16_t sResult = 0;
 
+
+#ifdef SWITCH
+	strcpy(pszBasePath,"./");
+#else
 	// Make sure they aren't passing an empty string, which should be be left alone
 	if (strlen(pszBasePath) > 0)
 		{
@@ -4737,7 +4741,7 @@ int16_t CorrectifyBasePath(								// Returns 0 if successfull, non-zero otherwi
 			TRACE("CorrectifyBasePath(): Specified path is already longer than the specified maximum length!\n");
 			}
 		}
-
+#endif
 	return sResult;
 	}
 

@@ -84,8 +84,6 @@
 #endif	// RSP_DEBUG_OUT_FILE
 
 
-#define RSP_TRACE_LOG_NAME	"TRACE.txt"
-
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Used to extract the filename from __FILE__.
@@ -115,42 +113,37 @@ char* Debug_FileName(char* pszPath)
 void rspTrace(char *frmt, ... )
 	{
  
+#if 0 
 		va_list varp;
 		  
 		va_start(varp, frmt);    
-		  
-#ifdef __ANDROID__
-		char errortext[512];
-		vsnprintf (errortext, 512, frmt, varp);
-		va_end (varp);
-		LOGI("%s",errortext);
-#else
+ 
 		vfprintf(stderr, frmt, varp);
-#endif
+ 
 
  
-		 FILE*	fs	= NULL;	// NOTE that we never fclose this so we can get 
-											// EVERY LAST TRACE -- so this may show up as
-											// a leak.  The system will close it though.
-		// If not yet open . . . 
-		if (fs == NULL)
-			{
-			// Attempt to open (Note that we never close this -- the system does).
-			// This will probably show up as a leak.
-			fs	= fopen(RSP_TRACE_LOG_NAME, "a+");
-			if (fs)
-			{
-				 
-				char szOutput[512];
-				vsnprintf(szOutput, 512, frmt, varp);
-				fprintf(fs, szOutput);
-				fclose(fs);				
-			}
-			}
+	 FILE*	fs	= NULL;	// NOTE that we never fclose this so we can get 
+										// EVERY LAST TRACE -- so this may show up as
+										// a leak.  The system will close it though.
+	// If not yet open . . . 
+	if (fs == NULL)
+		{
+		// Attempt to open (Note that we never close this -- the system does).
+		// This will probably show up as a leak.
+		fs	= fopen("TRACE.TXT", "a+");
+		if (fs)
+		{
+			 
+			char szOutput[512];
+			vsnprintf(szOutput, 512, frmt, varp);
+			fprintf(fs, szOutput);
+			fclose(fs);				
+		}
+		}
 	
 
 		va_end(varp);
- 
+ #endif
 	}
 
 ///////////////////////////////////////////////////////////////////////////////

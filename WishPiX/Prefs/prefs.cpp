@@ -1049,6 +1049,8 @@ int16_t RPrefs::GetVal(							// Returns 0 if successfull, non-zero otherwise
 	ASSERT(s16Value);
 
 	sprintf(pszDefault, "%d", (int)s16Default);
+	
+	 
 	m_sErrorStatus = GetVal(pszSection, pszVariable, pszDefault, pszValue);
 	if (m_sErrorStatus == 0)
 		{

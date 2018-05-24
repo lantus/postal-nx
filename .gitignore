@@ -1,0 +1,7 @@
+
+*.o
+*.pfs0
+*.nso
+*.nro
+*.nacp
+*.elf

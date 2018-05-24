@@ -811,7 +811,7 @@ extern void CutSceneStart(
 		}
 	else
 		{
-		TRACE("CutScene(): Error loading bg image: '%s'\n", FullPathVD(szText));
+		TRACE("CutScene(): Error loading bg image: '%s'\n", szText);
 		delete ms_pCut->m_pimBGLayer;
 		ms_pCut->m_pimBGLayer	= NULL;
 		}

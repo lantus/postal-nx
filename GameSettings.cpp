@@ -413,6 +413,9 @@ int16_t CGameSettings::LoadPrefs(
 		sResult = -1;
 		rspMsgBox(RSP_MB_ICN_STOP | RSP_MB_BUT_OK, g_pszCriticalErrorTitle, g_pszBadPath_s_s, "File", "Realms");
 		}
+		
+		
+	strcpy(m_pszRealmPrefsFile,"./res/levels/Postal Plus realms.ini");
 
 	pPrefs->GetVal("Game", "RecentDifficulty", m_sDifficulty, &m_sDifficulty);
 	if (m_sDifficulty < 0)

@@ -701,7 +701,7 @@ extern int16_t rspSetVideoMode(	// Returns 0 if successfull, non-zero otherwise
         TRACE("RequestedWidth %d   RequestedHeight %d\n",RequestedWidth,RequestedHeight);
 
         const char *title = sdlAppName ? sdlAppName : "";
-        sdlWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_FULLSCREEN);
+        sdlWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, sWidth, sHeight, SDL_WINDOW_FULLSCREEN);
         if (!sdlWindow)
         {
             char buf[128];

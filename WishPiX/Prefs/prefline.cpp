@@ -62,6 +62,11 @@ inline int16_t GetVar(	// Returns 0 on success.
 	{
 	int16_t	sRes	= 0;	// Assume success.
 
+
+//TRACE("1 pszLine = '%s'\n",pszLine);
+//TRACE("1 pszVar = '%s'\n",pszVar);
+//TRACE("1 pszVal = '%s'\n",pszVal);
+
 	int16_t	j, i, k;
 	// Copy variable name to out string
 	for (j = 0, i = 0; pszLine[i] != '\0' && pszLine[i] != '='; i++, j++)
@@ -77,7 +82,7 @@ inline int16_t GetVar(	// Returns 0 on success.
 		// Remove trailing whitespace.
 		for (k = j - 1; isspace(pszVar[k]) && k > 0; k--) ;
 
-		pszVar[k + 1] = '\0';
+			pszVar[k + 1] = '\0';
 		}
 
 	if (pszLine[i] == '\0')
@@ -104,7 +109,18 @@ inline int16_t GetVar(	// Returns 0 on success.
 				strcpy(pszVal, &pszLine[i]);
 			}
 		}
+	
+	 
 
+	if (pszVal)
+	{
+		char *src, *dst;
+		for (src = dst = pszVal; *src != '\0'; src++) {
+			*dst = *src;
+			if (*dst != '\r') dst++;
+		}
+		*dst = '\0';
+	}
 	return sRes;
 	}
 

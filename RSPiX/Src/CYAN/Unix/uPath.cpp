@@ -94,6 +94,9 @@ extern char* rspPathToSystem(			// Returns pointer to system-specific path (stat
 	ASSERT(strlen(pszRSPiX) <= RSP_MAX_PATH);
 	
 	static char acDest[RSP_MAX_PATH+1];
+	
+	TRACE("'%s', '%s', '%s'\n", rspPathToSystem(pszRSPiX, acDest), pszRSPiX, acDest);
+	
 	return rspPathToSystem(pszRSPiX, acDest);
 	}
 
