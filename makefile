@@ -37,7 +37,7 @@ endif
 
 OUTPUT := postal
 LINKER := aarch64-none-elf-g++ 
-LIBS := -specs=$(DEVKITPRO)/libnx/switch.specs -g -march=armv8-a -mtune=cortex-a57 -mtp=soft -fPIE -L$(DEVKITPRO)/libnx/lib -L$(DEVKITPRO)/portlibs/switch/lib -lSDL2 -lnx
+LIBS := -specs=$(DEVKITPRO)/libnx/switch.specs -g -march=armv8-a -mtune=cortex-a57 -mtp=soft -fPIE -L$(DEVKITPRO)/libnx/lib -L$(DEVKITPRO)/portlibs/switch/lib -lSDL2 -lEGL -lglapi -ldrm_nouveau -lnx
 CFLAGS += -march=armv8-a -mtune=cortex-a57 -mtp=soft -fPIE
 CLIENTEXE := $(BINDIR)/$(OUTPUT).elf
  
